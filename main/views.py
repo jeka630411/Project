@@ -1,8 +1,11 @@
+import json
+
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 from .forms import RegistrationForm
-from .models import User, CalculationResult
-
-
+from .models import Rating
 
 
 def index(request):
@@ -87,6 +90,24 @@ def success(request):
             return render(request, 'main/success.html', {'result2': result2, 'mark1': mark1})
 
     return render(request, 'main/success.html')
+
+
+
+# Представление для сохранения рейтинга
+@ensure_csrf_cookie
+def rating_view(request):
+    if request.method == 'GET':
+        return render(request, 'main/rating.html')
+    elif request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            total_score = data.get('total_score', 0)
+            Rating.objects.create(total_score=total_score)
+            return JsonResponse({'status': 'success', 'message': 'Рейтинг сохранен успешно!'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    else:
+        return HttpResponse("Method not supported", status=405)
 
 
 

@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор критериев</title>
+<style>
+.field-pair {
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<h1>Калькулятор критериев</h1>
+<form id="calcForm">
+    <div id="fieldsContainer">
+    <!-- Поля будут динамически добавлены здесь -->
+    </div>
+    <button type="button" id="saveButton" disabled>Сохранить</button>
+</form>
+<h2>Итоговые баллы: <span id="totalPoints">0</span></h2>
+
+<script src="{% static 'main/js/rating_calculator.js' %}"></script>
+</body>
+</html>
