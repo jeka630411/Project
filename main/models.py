@@ -13,3 +13,17 @@ class CalculationResult(models.Model):
     B1 = models.IntegerField()
     K2 = models.FloatField()
     mark1 = models.IntegerField()
+
+# class College(models.Model):
+#     title = models.TextField(max_length=255)
+#     rating = models.FloatField(default=0)
+#
+#     def __str__(self):
+#         return f"College: {self.title}, rating: {self.rating}"
+
+
+class Rating(models.Model):
+    total_score = models.FloatField()
+
+    def __str__(self):
+        return f"Rating: {self.total_score}"
